@@ -26,6 +26,6 @@ gulp.task('watch', () => {
     proxy: `localhost:${port}`
   });
   // Watchers
-  gulp.watch('./src/sass/**/*.scss', gulp.series('sass'));
+  gulp.watch('./src/**/*.scss', gulp.series('sass'));
   gulp.watch('./views/**/*.hbs', browserSync.reload);
 });

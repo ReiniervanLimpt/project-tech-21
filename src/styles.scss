@@ -1,4 +1,4 @@
-@import './components/variables';
+@import './components/variables', './components/reset';
 
 body {
   background-color: $background-color;
@@ -6,8 +6,10 @@ body {
 
 nav{
   & ul{
+    list-style: none;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     & li{
       width: 25%;
     }
