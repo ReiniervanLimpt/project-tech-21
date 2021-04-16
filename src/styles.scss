@@ -1,0 +1,15 @@
+@import './components/variables';
+
+body {
+  background-color: $background-color;
+}
+
+nav{
+  & ul{
+    width: 100%;
+    display: flex;
+    & li{
+      width: 25%;
+    }
+  }
+}

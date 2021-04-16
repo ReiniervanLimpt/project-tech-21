@@ -4,7 +4,12 @@
   "description": "Matching app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "predev": "npm run build:css",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "prebuild:css": "rimraf ./public/dist",
+    "build:css": "gulp sass",
+    "watch:css": "gulp watch"
   },
   "repository": {
     "type": "git",
