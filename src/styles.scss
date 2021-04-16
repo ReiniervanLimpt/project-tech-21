@@ -5,13 +5,60 @@ body {
 }
 
 nav{
+  height: 100%;
   & ul{
+    height: 100%;
     list-style: none;
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
     & li{
-      width: 25%;
+      height: 100%;
+      width: 33%;
+      display: flex;
+      & a {
+        width: 30%;
+        height: 50%;
+        margin: auto;
+        align-self: center;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+        
+      }
+    }
+  }
+}
+
+body {
+  font-size: 18px;
+}
+
+div#page {
+  width: 100vw;
+  height: 100vh;
+  & header {
+    background-color: black;
+    height: 10vh;
+  }
+  & main {
+    height: 80vh;
+  }
+  & footer {
+    background-color: black;
+    height: 10vh;
+  }
+  & section {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    & h1 {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 3em;
     }
   }
 }
