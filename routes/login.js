@@ -1,4 +1,4 @@
-const dataManager = require('../modules/datamanager.js')
+const dataManager = require('../modules/dataManager.js')
 
 async function login(req, res) {
   dataManager.logIn(req, res)
