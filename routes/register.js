@@ -1,4 +1,4 @@
-const dataManager = require('../modules/datamanager.js')
+const dataManager = require('../modules/dataManager.js')
 
 // Render registration page
 function register(req, res) {
