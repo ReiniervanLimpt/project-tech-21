@@ -1,0 +1,54 @@
+<div id="page">
+{{> header}}
+<main>
+  <section id="registration-form__container">
+    <form action="/register" method="post">
+        <label for="name">Name</label>
+        <input required name="name" type="text">
+        <label for="birth_date">Birth Date</label>
+        <input required name="birth_date" type="date">
+        <label>Male</label>
+        <input type="radio" name="sex" value="male" required>
+        <label>Woman</label>
+        <input type="radio" name="sex" value="woman" required>
+        <label for="cuisine">Favorite cuisine</label>
+        <select name="cuisine" required>
+        <option value="Chinese">Chinese</option>
+        <option value="Thai">Thai</option>
+        <option value="Eastern">Eastern</option>
+        <option value="French">French</option>
+        <option value="Spanish">Spanish</option>
+        <option value="Japanese">Japanese</option>
+        <option value="Italian">Italian</option>
+      </select>
+        <label for="preference">Are you veg(an)</label>
+        <select name="preference" required>
+        <option value="neither">Neither</option>
+        <option value="vegatarian">Vegatarian</option>
+        <option value="vegan">Vegan</option>
+      </select>
+        <label for="location">Where would you like to date</label>
+        <select name="location" required>
+        <option value="no_preference">No Preference</option>
+        <option value="restaurant">A restaurant</option>
+        <option value="at_home">At home</option>
+        <option value="someone_else">At someone else's place</option>
+      </select>
+        <label for="description">Give a short description of yourself</label>
+        <textarea name="description" rows="5"></textarea>
+        <label for="email">e-mail</label>
+        <input name="email" required type="email" placeholder="name@domain.com">
+        <label for="password">Your password must contain at least one number and a capital character (min 8.)</label>
+        <input name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" placeholder="password">
+        <label for="password_verification">wachtwoord verifïeren:</label>
+        <input name="password_verification" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" placeholder="verification">
+      <input type="submit" value="register">
+    </form>
+  </section>
+  {{> loginForm}}
+</main>
+{{> footer}}
+</div>
+
+<script src="js/registration.js"></script>
+<script src="js/ajax/login.js"></script>

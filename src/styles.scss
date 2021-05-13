@@ -1,4 +1,4 @@
-@import './components/variables', './components/reset';
+@import './components/variables', './components/reset', './pages/home', './pages/register';
 
 body {
   background-color: $background-color;
@@ -17,14 +17,13 @@ nav{
       display: flex;
       & a {
         width: 30%;
-        height: 50%;
         margin: auto;
         align-self: center;
         text-align: center;
         text-decoration: none;
         text-transform: uppercase;
         color: white;
-        
+
       }
     }
   }

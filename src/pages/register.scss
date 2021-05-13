@@ -1,0 +1,62 @@
+#registration-form__container {
+  width: 80%;
+  margin: auto;
+  background-color: rgba(44, 92, 121, 0.1);
+  display: flex;
+  padding: 2em;
+  box-sizing: border-box;
+  & form {
+    width: 60%;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
+    & label {
+      width: 100%;
+      margin: 20px auto 10px;
+    }
+    & label:nth-of-type(3), label:nth-of-type(4) {
+      width: 10%;
+      margin: 20px 0 10px;
+    }
+    & label:nth-of-type(3) {
+      margin-left: 25%;
+    }
+    & input {
+      height: 35px;
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid black;
+    }
+    & input[type=radio] {
+      align-self: center;
+      height: auto;
+      width: 15%;
+      margin: 20px 5px 10px;
+    }
+    & select {
+      height: 35px;
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid black;
+    }
+    & textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid black;
+    }
+    & input[type=submit] {
+      color: white;
+      background-color: black;
+      border: none;
+      border-radius: $border-radius-small;
+      width: 250px;
+      height: 40px;
+      margin: 20px auto 0;
+    }
+  }
+}

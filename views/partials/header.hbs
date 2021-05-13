@@ -6,4 +6,9 @@
             <li> <a href="/">home</a> </li>
         </ul>
     </nav>
+    {{#if user}}
+      <a href="/logout">Log out</a>
+    {{else}}
+      <button class="login-button">Log in</button>
+    {{/if}}
 </header>

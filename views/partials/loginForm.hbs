@@ -1,0 +1,15 @@
+<div class="login-form__container {{#if registered}} {{else}} hidden {{/if}}">
+    <form action="/login" onsubmit="login(this, event)">
+      <div class="form-head">
+        <h2>Login</h2>
+      </div>
+      <label for="email">Email</label>
+      <input type="text" name="email">
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      <span class="error"></span>
+      <p class="close-button">X</p>
+      <a href="/register">Dont have an account?</a>
+      <input type="submit" value="Login">
+    </form>
+  </div>
