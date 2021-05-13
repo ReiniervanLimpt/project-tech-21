@@ -61,3 +61,18 @@ div#page {
     }
   }
 }
+
+span.error, span.reg-error {
+  color: red;
+  position: absolute;
+  bottom: 1em;
+  right: 2em;
+}
+
+span.reg-error {
+  top: 1em;
+}
+
+.hidden {
+  display: none;
+}

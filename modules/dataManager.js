@@ -55,7 +55,7 @@ const dataManager = {
     fs.readFile(jsonFile, (err, content) => {
       if (err) return console.log(err)
       const contentJSON = JSON.parse(content)
-      checkIfExists(contentJSON).then(function(result) {
+      dataManager.checkIfExists(req, res, contentJSON).then(function(result) {
         const user = contentJSON.users.find(x => x.email === email)
         if (result) {
           if (user.password === password) {
@@ -69,8 +69,11 @@ const dataManager = {
         }
       })
     })
+  },
 
-    async function checkIfExists(data) {
+  checkIfExists: async function(req, res, data) {
+    const email = req.body.email
+    if (typeof data === "object") {
       //checks if the user allready exists in the database
       let exists = false
       const correspondingData = data.users.find(x => x.email === email)
@@ -78,6 +81,30 @@ const dataManager = {
         exists = true
       }
       return exists
+    } else {
+      fs.readFile(jsonFile, (err, content) => {
+        if (err) return console.log(err)
+        const contentJSON = JSON.parse(content)
+        check(contentJSON).then(function(result) {
+          console.log(result)
+          if (result === true) {
+            res.send("that email is already in use")
+          } else {
+            res.send({
+              status: 200
+            })
+          }
+        })
+      })
+      //checks if the user allready exists in the database
+      async function check(data) {
+        let exists = false
+        const correspondingData = data.users.find(x => x.email === email)
+        if (correspondingData != undefined) {
+          exists = true
+        }
+        return exists
+      }
     }
   }
 }

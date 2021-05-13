@@ -2,11 +2,11 @@
 {{> header}}
 <main>
   <section id="registration-form__container">
-    <form action="/register" method="post">
+    <form id="registration-form" action="/register" method="post" onsubmit="checkIfValid(this)">
         <label for="name">Name</label>
         <input required name="name" type="text">
-        <label for="birth_date">Birth Date</label>
-        <input required name="birth_date" type="date">
+        <label for="birthdate">Birth Date</label>
+        <input required name="birthdate" type="date">
         <label>Male</label>
         <input type="radio" name="sex" value="male" required>
         <label>Woman</label>
@@ -37,13 +37,14 @@
         <label for="description">Give a short description of yourself</label>
         <textarea name="description" rows="5"></textarea>
         <label for="email">e-mail</label>
-        <input name="email" required type="email" placeholder="name@domain.com">
+        <input name="email" required type="email" placeholder="name@domain.com" onchange="checkEmailAvailability()">
         <label for="password">Your password must contain at least one number and a capital character (min 8.)</label>
-        <input name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" placeholder="password">
+        <input id="passwordInput" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" placeholder="password" onkeyup="enableVerification()">
         <label for="password_verification">wachtwoord verifïeren:</label>
-        <input name="password_verification" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" placeholder="verification">
+        <input id="passwordVerification" name="password_verification" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" disabled onkeyup="checkPasswords()">
       <input type="submit" value="register">
     </form>
+    <span class="reg-error"></span>
   </section>
   {{> loginForm}}
 </main>
@@ -52,3 +53,4 @@
 
 <script src="js/registration.js"></script>
 <script src="js/ajax/login.js"></script>
+<script src="js/ajax/register.js"></script>

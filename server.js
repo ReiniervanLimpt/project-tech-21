@@ -53,7 +53,7 @@ const upload = multer({
 // routes
 const home = require('./routes/home.js')
 const register = require('./routes/register.js')
-const login = require('./routes/login.js')
+const dataManager = require('./modules/dataManager.js')
 
 const notFound = require('./routes/notFound.js')
 
@@ -82,16 +82,19 @@ app
 
   // Get routes
   .get('/', home)
-  .get('/register', urlencodedParser, register)
+  .get('/register', register)
   .get('/logout', function(req, res) {
     req.session.destroy()
 
     res.redirect('/')
   })
 
-  //Post routes
-  .post('/login', login)
+  //POSTfrom forms
   .post('/register', register)
+
+  //AJAX calls
+  .post('/login', dataManager.logIn)
+  .post('/checkemail', dataManager.checkIfExists)
 
   // 404 not found
   .use(notFound)

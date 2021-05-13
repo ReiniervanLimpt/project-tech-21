@@ -13,3 +13,45 @@ closeButtons.forEach(item => {
     item.parentNode.parentNode.classList.toggle('hidden')
   })
 })
+
+//check passwords
+
+const password = document.querySelector('#passwordInput')
+const verification = document.querySelector('#passwordVerification')
+const submitButton = document.querySelector('input[type="submit"]')
+
+function enableVerification() {
+  if (password.value.length >= 8) {
+    verification.removeAttribute('disabled')
+  } else {
+    verification.setAttribute('disabled', true)
+  }
+  checkPasswords()
+}
+
+// display if somethings wrong
+const errorDisplay = document.querySelector('.reg-error')
+
+function checkPasswords() {
+  if (password.value === verification.value) {
+    errorDisplay.innerHTML = ""
+  } else {
+    errorDisplay.innerHTML = "passwords dont match"
+  }
+}
+
+function checkIfValid(form) {
+  event.preventDefault()
+
+  let valid = false
+
+  if (errorDisplay.innerHTML === "") {
+    valid = true
+  }
+
+  if (valid) {
+    form.submit()
+  } else {
+    return
+  }
+}
