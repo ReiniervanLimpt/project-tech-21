@@ -62,17 +62,35 @@ div#page {
   }
 }
 
-span.error, span.reg-error {
+span.error, span.password-error, span.email-error {
   color: red;
   position: absolute;
   bottom: 1em;
   right: 2em;
 }
 
-span.reg-error {
+span.password-error {
   top: 1em;
+}
+
+span.email-error {
+  top: 3em;
 }
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 800px) {
+  #registration-form__container {
+    padding: 10px;
+    & form#registration-form {
+      width: 100%;
+    }
+  }
+  div.login-form__container {
+    & form {
+      width: 80%;
+    }
+  }
 }

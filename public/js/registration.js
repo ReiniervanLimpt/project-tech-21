@@ -30,13 +30,14 @@ function enableVerification() {
 }
 
 // display if somethings wrong
-const errorDisplay = document.querySelector('.reg-error')
+const emailErrorDisplay = document.querySelector('.email-error')
+const wrongPassword = document.querySelector('.password-error')
 
 function checkPasswords() {
   if (password.value === verification.value) {
-    errorDisplay.innerHTML = ""
+    wrongPassword.innerHTML = ""
   } else {
-    errorDisplay.innerHTML = "passwords dont match"
+    wrongPassword.innerHTML = "passwords dont match"
   }
 }
 
@@ -45,7 +46,7 @@ function checkIfValid(form) {
 
   let valid = false
 
-  if (errorDisplay.innerHTML === "") {
+  if (wrongPassword.innerHTML === "" && emailErrorDisplay.innerHTML === "") {
     valid = true
   }
 

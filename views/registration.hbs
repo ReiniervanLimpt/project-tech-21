@@ -44,7 +44,8 @@
         <input id="passwordVerification" name="password_verification" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" type="password" disabled onkeyup="checkPasswords()">
       <input type="submit" value="register">
     </form>
-    <span class="reg-error"></span>
+    <span class="email-error"></span>
+    <span class="password-error"></span>
   </section>
   {{> loginForm}}
 </main>

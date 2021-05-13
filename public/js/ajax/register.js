@@ -1,7 +1,7 @@
 async function checkEmailAvailability() {
   console.log("iets")
   // element to display the user if something went wrong when logging in
-  const errorDisplay = document.querySelector('.reg-error')
+  const errorDisplay = document.querySelector('.email-error')
   xhr = new XMLHttpRequest()
   event.preventDefault()
   const form = document.querySelector('#registration-form')
