@@ -1,8 +1,10 @@
 const fs = require('fs')
 const jsonFile = './data/foodLove.json'
+const argon2 = require('argon2')
 
 const dataManager = {
   createUser: function(req, res) {
+
     const {
       name,
       birthDate,
@@ -15,32 +17,37 @@ const dataManager = {
       password
     } = req.body
 
-    fs.readFile(jsonFile, (err, content) => {
-      if (err) return console.log(err)
-      const contentJSON = JSON.parse(content)
-      processData(contentJSON)
-    })
+    argon2.hash(password).then(processData)
 
-    function processData(data) {
-      const users = data.users
-      const userId = users.length + 1
-      console.log(userId)
-      const newUserData = {
-        userId,
-        name,
-        birthDate,
-        sex,
-        cuisine,
-        preference,
-        location,
-        description,
-        email,
-        password
-      }
-      data.users.push(newUserData)
-      fs.writeFile(jsonFile, JSON.stringify(data), err => {
-        if (err) console.log(err)
+    async function processData(hash) {
+
+      fs.readFile(jsonFile, (err, content) => {
+        if (err) return console.log(err)
+        const contentJSON = JSON.parse(content)
+        insertData(contentJSON)
       })
+
+      function insertData(data) {
+        const users = data.users
+        const userId = users.length + 1
+        console.log(userId)
+        const newUserData = {
+          userId,
+          name,
+          birthDate,
+          sex,
+          cuisine,
+          preference,
+          location,
+          description,
+          email,
+          hash
+        }
+        data.users.push(newUserData)
+        fs.writeFile(jsonFile, JSON.stringify(data), err => {
+          if (err) console.log(err)
+        })
+      }
     }
   },
 
@@ -58,17 +65,21 @@ const dataManager = {
       dataManager.checkIfExists(req, res, contentJSON).then(function(result) {
         const user = contentJSON.users.find(x => x.email === email)
         if (result) {
-          if (user.password === password) {
-            req.session.user = user
-            res.send("logged in")
-          } else {
-            res.send("wrong password")
-          }
+          argon2.verify(user.hash, password).then(verified)
         } else {
           res.send("user doesnt exist")
         }
       })
     })
+
+    function verified(match) {
+      if (match) {
+        req.session.user = match
+        res.send("logged in")
+      } else {
+        res.send("wrong password")
+      }
+    }
   },
 
   checkIfExists: async function(req, res, data) {
