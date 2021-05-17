@@ -37,14 +37,14 @@ div#page {
   width: 100vw;
   height: 100vh;
   & header {
-    background-color: black;
+    background-color: $dark-background-color;
     height: 10vh;
   }
   & main {
     height: 80vh;
   }
   & footer {
-    background-color: black;
+    background-color: $dark-background-color;
     height: 10vh;
   }
   & section {

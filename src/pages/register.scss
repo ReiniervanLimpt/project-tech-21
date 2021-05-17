@@ -16,21 +16,23 @@
     overflow: scroll;
     overflow-x: hidden;
     & label {
+      color: white;
       width: 100%;
       margin: 20px auto 10px;
     }
     & label:nth-of-type(3), label:nth-of-type(4) {
-      width: 10%;
+      width: 15%;
       margin: 20px 0 10px;
     }
-    & label:nth-of-type(3) {
-      margin-left: 25%;
+    input, select, textarea {
+      box-sizing: border-box;
+      transition: all 0.2s;
     }
     & input {
       height: 35px;
       width: 100%;
       border: none;
-      border-bottom: 2px solid black;
+      border-bottom: 2px solid $black;
     }
     & input[type=radio] {
       align-self: center;
@@ -42,16 +44,19 @@
       height: 35px;
       width: 100%;
       border: none;
-      border-bottom: 2px solid black;
+      border-bottom: 2px solid $black;
     }
     & textarea {
       width: 100%;
       border: none;
-      border-bottom: 2px solid black;
+      border-bottom: 2px solid $black;
+    }
+    :focus {
+      border-bottom: 4px solid $light-background-color;
     }
     & input[type=submit] {
       color: white;
-      background-color: black;
+      background-color: $female-pink;
       border: none;
       border-radius: $border-radius-small;
       width: 250px;
