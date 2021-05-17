@@ -17,3 +17,4 @@ Ive decided i want to focus on the registration and logging in of users because 
 * [rimraf](https://www.npmjs.com/package/rimraf)
 * [nodemon](https://www.npmjs.com/package/nodemon)
 * [handlebars templating](https://www.npmjs.com/package/express-handlebars)
+* [argon2](https://www.npmjs.com/package/argon2)
