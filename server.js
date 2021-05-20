@@ -5,8 +5,8 @@ const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 
-const MongoClient = require('mongodb')
 const mongoose = require('mongoose')
+const connectMongoose = require('./controllers/mongoose.js')
 
 const multer = require('multer')
 const app = express()
@@ -25,28 +25,8 @@ const upload = multer({
   dest: 'static/upload/'
 })
 
-// body parser and multer middleware for form data
-
-// mongoose and DB setup
-
-// const url = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@foodlove.i09d7.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
-//
-// async function connect() {
-//   try {
-//     await mongoose.connect(url, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//       useFindAndModify: false,
-//       useCreateIndex: true
-//     }).then(async function() {
-//       console.log(mongoose.connection)
-//     })
-//   } catch (e) {
-//     console.log(e)
-//   }
-// }
-//
-// connect()
+// mongoose and DB setup https://www.npmjs.com/package/mongoose
+connectMongoose()
 
 // mongoose and DB setup
 
@@ -83,13 +63,15 @@ app
   // Get routes
   .get('/', home)
   .get('/register', register)
+
+  // logging out
   .get('/logout', function(req, res) {
     req.session.destroy()
 
     res.redirect('/')
   })
 
-  //POSTfrom forms
+  //POST from forms
   .post('/register', register)
 
   //AJAX calls
@@ -100,4 +82,4 @@ app
   .use(notFound)
 
 
-server.listen(port, () => console.log(`App listening on port ${port}!`));
+server.listen(port, () => console.log(`App listening on port ${port}!`))

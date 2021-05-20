@@ -1,56 +1,30 @@
 const fs = require('fs')
-const jsonFile = './data/foodLove.json'
 const argon2 = require('argon2')
+
+const mongoose = require("mongoose")
+const User = require("../models/user.js")
 
 const dataManager = {
   createUser: function(req, res) {
-
-    const {
-      name,
-      birthDate,
-      sex,
-      cuisine,
-      preference,
-      location,
-      description,
-      email,
-      password
-    } = req.body
-
-    argon2.hash(password).then(processData)
+    argon2.hash(req.body.password).then(processData)
 
     async function processData(hash) {
-
-      fs.readFile(jsonFile, (err, content) => {
-        if (err) return console.log(err)
-        const contentJSON = JSON.parse(content)
-        insertData(contentJSON)
+      const newUser = new User({
+        name: req.body.name,
+        birthdate: req.body.birthdate,
+        sex: req.body.sex,
+        cuisine: req.body.cuisine,
+        preference: req.body.preference,
+        location: req.body.location,
+        bio: req.body.description,
+        email: req.body.email,
+        password: hash
       })
-
-      function insertData(data) {
-        const users = data.users
-        const userId = users.length + 1
-        console.log(userId)
-        const newUserData = {
-          userId,
-          name,
-          birthDate,
-          sex,
-          cuisine,
-          preference,
-          location,
-          description,
-          email,
-          hash
-        }
-        data.users.push(newUserData)
-        fs.writeFile(jsonFile, JSON.stringify(data), err => {
-          if (err) console.log(err)
-        })
-      }
+      newUser.save(function(error) {
+        console.log(error)
+      })
     }
   },
-
 
 
   logIn: async function(req, res) {
@@ -59,22 +33,22 @@ const dataManager = {
       password
     } = req.body
 
-    fs.readFile(jsonFile, (err, content) => {
-      if (err) return console.log(err)
-      const contentJSON = JSON.parse(content)
-      dataManager.checkIfExists(req, res, contentJSON).then(function(result) {
-        const user = contentJSON.users.find(x => x.email === email)
-        if (result) {
-          argon2.verify(user.hash, password).then(verified)
-        } else {
-          res.send("user doesnt exist")
-        }
-      })
+    const correspondingData = await User.findOne({
+      email: email
+    }).exec((error, data) => {
+      if (error) {
+        console.log(error)
+      } else if (data) {
+        argon2.verify(data.password, password).then(verified, data)
+      } else {
+        res.send("user doesnt exist")
+      }
     })
 
-    function verified(match) {
+    function verified(match, data) {
       if (match) {
         req.session.user = match
+        req.session.userData = data
         res.send("logged in")
       } else {
         res.send("wrong password")
@@ -82,41 +56,23 @@ const dataManager = {
     }
   },
 
-  checkIfExists: async function(req, res, data) {
+
+  checkIfExists: async function(req, res) {
     const email = req.body.email
-    if (typeof data === "object") {
-      //checks if the user allready exists in the database
-      let exists = false
-      const correspondingData = data.users.find(x => x.email === email)
-      if (correspondingData != undefined) {
-        exists = true
-      }
-      return exists
-    } else {
-      fs.readFile(jsonFile, (err, content) => {
-        if (err) return console.log(err)
-        const contentJSON = JSON.parse(content)
-        check(contentJSON).then(function(result) {
-          console.log(result)
-          if (result === true) {
-            res.send("that email is already in use")
-          } else {
-            res.send({
-              status: 200
-            })
-          }
+
+    const correspondingData = await User.findOne({
+      email: email
+    }).exec((error, data) => {
+      if (error) {
+        console.log(error)
+      } else if (data) {
+        res.send("that email is already in use")
+      } else {
+        res.send({
+          status: 200
         })
-      })
-      //checks if the user allready exists in the database
-      async function check(data) {
-        let exists = false
-        const correspondingData = data.users.find(x => x.email === email)
-        if (correspondingData != undefined) {
-          exists = true
-        }
-        return exists
       }
-    }
+    })
   }
 }
 

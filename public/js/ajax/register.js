@@ -1,5 +1,4 @@
 async function checkEmailAvailability() {
-  console.log("iets")
   // element to display the user if something went wrong when logging in
   const errorDisplay = document.querySelector('.email-error')
   xhr = new XMLHttpRequest()
