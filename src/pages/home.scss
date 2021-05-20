@@ -3,16 +3,12 @@ header {
   & nav {
     flex-grow: 3;
   }
-  & button.login-button, a{
+  & button.login-button, button.logout-button, a{
     flex-grow: 1;
+    padding: 0;
   }
-  & button.login-button {
+  & button.login-button, button.logout-button {
     background-color: white;
-  }
-  & a {
-    text-align: center;
-    align-self: center;
-
   }
 }
 

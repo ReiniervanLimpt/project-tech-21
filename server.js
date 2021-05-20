@@ -16,7 +16,6 @@ const port = process.env.PORT || 4000
 const publicPath = path.join(__dirname, './public/')
 
 // multer and bodyparser middleware for form data
-
 const urlencodedParser = bodyParser.urlencoded({
   extended: true
 })
@@ -33,6 +32,7 @@ connectMongoose()
 // routes
 const home = require('./routes/home.js')
 const register = require('./routes/register.js')
+const account = require('./routes/account.js')
 const dataManager = require('./modules/dataManager.js')
 
 const notFound = require('./routes/notFound.js')
@@ -63,6 +63,7 @@ app
   // Get routes
   .get('/', home)
   .get('/register', register)
+  .get('/account', account)
 
   // logging out
   .get('/logout', function(req, res) {
@@ -77,6 +78,7 @@ app
   //AJAX calls
   .post('/login', dataManager.logIn)
   .post('/checkemail', dataManager.checkIfExists)
+  .post('/updateAccount', dataManager.updateAccount)
 
   // 404 not found
   .use(notFound)

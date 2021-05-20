@@ -9,6 +9,7 @@ function home(req, res) {
   res.render('home.hbs', {
     title: "FoodLove",
     user: req.session.user,
+    data: req.session.userData,
     registered: registered
   })
   registered = false

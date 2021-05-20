@@ -39,21 +39,35 @@ const dataManager = {
       if (error) {
         console.log(error)
       } else if (data) {
-        argon2.verify(data.password, password).then(verified, data)
+        argon2.verify(data.password, password).then(verified, data).then(function(result) {
+          req.session.userData = data
+          res.send(result)
+        })
       } else {
         res.send("user doesnt exist")
       }
     })
 
-    function verified(match, data) {
+    function verified(match) {
       if (match) {
         req.session.user = match
-        req.session.userData = data
-        res.send("logged in")
+        return "logged in"
       } else {
         res.send("wrong password")
       }
     }
+  },
+
+  updateAccount: async function(req, res) {
+    const filter = {
+      email: req.session.userData.email
+    }
+    const updateData = await User.findOneAndUpdate(filter, req.body, {
+      new: true
+    }).exec((error, data) => {
+      req.session.userData = data
+      res.send("data has been updated")
+    })
   },
 
 

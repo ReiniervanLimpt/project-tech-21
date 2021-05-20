@@ -3,13 +3,14 @@
         <ul>
             <li> <a href="/">home</a> </li>
             {{#if user}}
+            <li> <a href="/account">account</a> </li>
             {{else}}
             <li> <a href="/register">register</a> </li>
             {{/if}}
         </ul>
     </nav>
     {{#if user}}
-      <a href="/logout">Log out</a>
+    <button class="logout-button" onclick="window.location.href='/logout'">Log out</button>
     {{else}}
       <button class="login-button">Log in</button>
     {{/if}}

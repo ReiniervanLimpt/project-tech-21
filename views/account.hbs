@@ -1,0 +1,49 @@
+<div id="page">
+{{> header}}
+<main>
+  <section id="account-form__container">
+    <form id="registration-form">
+        <label for="name">Name</label>
+        <input required name="name" type="text" value="{{data.name}}" onfocusout="updateAccount(this, this.name, this.value)">
+        <label for="birthdate">Birth Date</label>
+        <input required name="birthdate" type="date" value="{{data.birthdate}}" onfocusout="updateAccount(this, this.name, this.value)">
+        <label>Male</label>
+        <input type="radio" name="sex" value="male" required {{#ifEquals data.sex "male"}} checked {{/ifEquals}} onchange="updateAccount(this, this.name, this.value)">
+        <label>Woman</label>
+        <input type="radio" name="sex" value="female" required {{#ifEquals data.sex "female"}} checked {{/ifEquals}} onchange="updateAccount(this, this.name, this.value)">
+        <label for="cuisine">Favorite cuisine</label>
+        <select name="cuisine" required onchange="updateAccount(this, this.name, this.value)">
+        <option value="chinese" {{#ifEquals data.cuisine "chinese"}} selected {{/ifEquals}}>Chinese</option>
+        <option value="thai" {{#ifEquals data.cuisine "thai"}} selected {{/ifEquals}}>Thai</option>
+        <option value="eastern" {{#ifEquals data.cuisine "eastern"}} selected {{/ifEquals}}>Eastern</option>
+        <option value="french" {{#ifEquals data.cuisine "french"}} selected {{/ifEquals}}>French</option>
+        <option value="spanish" {{#ifEquals data.cuisine "spanish"}} selected {{/ifEquals}}>Spanish</option>
+        <option value="japanese" {{#ifEquals data.cuisine "japanese"}} selected {{/ifEquals}}>Japanese</option>
+        <option value="italian" {{#ifEquals data.cuisine "italian"}} selected {{/ifEquals}}>Italian</option>
+      </select>
+        <label for="preference">Are you veg(an)</label>
+        <select name="preference" required onchange="updateAccount(this, this.name, this.value)">
+        <option value="neither" {{#ifEquals data.preference "neither"}} selected {{/ifEquals}}>Neither</option>
+        <option value="vegatarian" {{#ifEquals data.preference "vegetarian"}} selected {{/ifEquals}}>Vegatarian</option>
+        <option value="vegan" {{#ifEquals data.preference "vegan"}} selected {{/ifEquals}}>Vegan</option>
+      </select>
+        <label for="location">Where would you like to date</label>
+        <select name="location" required onchange="updateAccount(this, this.name, this.value)">
+        <option value="no_preference" {{#ifEquals data.location "no_preference"}} selected {{/ifEquals}}>No Preference</option>
+        <option value="restaurant" {{#ifEquals data.location "restaurant"}} selected {{/ifEquals}}>A restaurant</option>
+        <option value="at_home" {{#ifEquals data.location "at_home"}} selected {{/ifEquals}}>At home</option>
+        <option value="someone_else" {{#ifEquals data.location "someone_else"}} selected {{/ifEquals}}>At someone else's place</option>
+      </select>
+        <label for="description">Give a short description of yourself</label>
+        <textarea name="description" rows="5" onfocusout="updateAccount(this, this.name, this.value)">{{data.bio}}</textarea>
+        <label for="email">e-mail (used for login)</label>
+        <input name="email" required type="email" placeholder="name@domain.com" onchange="checkEmailAvailability(this, this.name, this.value)" value="{{data.email}}">
+    </form>
+    <span class="email-error"></span>
+    <span class="update-notifier"></span>
+  </section>
+</main>
+{{> footer}}
+</div>
+
+<script src="js/ajax/account.js"></script>

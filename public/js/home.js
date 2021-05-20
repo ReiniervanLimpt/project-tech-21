@@ -2,9 +2,11 @@ const loginButton = document.querySelector('.login-button')
 
 const loginForm = document.querySelector('.login-form__container')
 
-loginButton.addEventListener('click', function() {
-  loginForm.classList.toggle('hidden')
-})
+if (loginButton != undefined) {
+  loginButton.addEventListener('click', function() {
+    loginForm.classList.toggle('hidden')
+  })
+}
 
 const closeButtons = document.querySelectorAll('.close-button')
 

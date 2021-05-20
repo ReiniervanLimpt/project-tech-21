@@ -1,4 +1,4 @@
-@import './components/variables', './components/reset', './pages/home', './pages/register';
+@import './components/variables', './components/reset', './pages/home', './pages/register', './pages/account';
 
 body {
   background-color: $background-color;
@@ -63,14 +63,80 @@ div#page {
   }
 }
 
-span.error, span.password-error, span.email-error {
+#account-form__container, #registration-form__container{
+  & form {
+    width: 60%;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+    height: 60vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    & label {
+      color: white;
+      width: 100%;
+      margin: 20px auto 10px;
+    }
+    & label:nth-of-type(3), label:nth-of-type(4) {
+      width: 15%;
+      margin: 20px 0 10px;
+    }
+    input, select, textarea {
+      box-sizing: border-box;
+      transition: all 0.2s;
+    }
+    & input {
+      height: 35px;
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid $black;
+    }
+    & input[type=radio] {
+      align-self: center;
+      height: auto;
+      width: 15%;
+      margin: 20px 5px 10px;
+    }
+    & select {
+      height: 35px;
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid $black;
+    }
+    & textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid $black;
+    }
+    :focus {
+      border-bottom: 4px solid $light-background-color;
+    }
+    & input[type=submit] {
+      color: white;
+      background-color: $female-pink;
+      border: none;
+      border-radius: $border-radius-small;
+      width: 250px;
+      height: 40px;
+      margin: 20px auto 0;
+    }
+  }
+}
+
+span.error, span.password-error, span.email-error, span.update-notifier {
   color: red;
   position: absolute;
   bottom: 1em;
   right: 2em;
 }
 
-span.password-error {
+span.update-notifier {
+  color: green;
+}
+
+span.password-error, span.update-notifier {
   top: 1em;
 }
 
@@ -81,6 +147,25 @@ span.email-error {
 .hidden {
   display: none;
 }
+
+.updated {
+    animation-name: completeFlash;
+    animation-duration: 1s;
+  }
+
+@keyframes completeFlash {
+    0% {
+      background-color: white;
+    }
+
+    20% {
+      background-color: #D7FFE9;
+    }
+
+    100% {
+      background-color: white;
+    }
+  }
 
 @media screen and (max-width: 800px) {
   #registration-form__container {
