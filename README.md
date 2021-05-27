@@ -18,3 +18,9 @@ Ive decided i want to focus on the registration and logging in of users because 
 * [nodemon](https://www.npmjs.com/package/nodemon)
 * [handlebars templating](https://www.npmjs.com/package/express-handlebars)
 * [argon2](https://www.npmjs.com/package/argon2)
+* [Mongoose](https://www.npmjs.com/package/mongoose)
+
+### Yet to include
+- [ ] Verification of email in the mongoose user Schema
+- [ ] Matching functionality
+- [ ] Delete user functionality
